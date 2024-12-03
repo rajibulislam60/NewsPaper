@@ -1,11 +1,44 @@
-import React from 'react'
+import React, { useState } from "react";
+import newsCatagory from "../news/main";
 
 const Header = () => {
-  return (
-    <div className='container my-4'>
-        <h1 className='text-[34px] font-bold leading-[38px] text-center'>Head line the news</h1>
-    </div>
-  )
-}
+  // const newsCatagory = {
+  //   technology: "technology",
+  //   science: "science",
+  //   business: "business",
+  //   politics: "politics",
+  //   education: "education",
+  // };
 
-export default Header
+  let [news, setNews] = useState("");
+
+  let handleSearch = (e) => {
+    setNews(e.target.value);
+  };
+  let handleEnter = () => {};
+
+  return (
+    <div className="container my-4 flex flex-col items-center">
+      <h1 className="text-center text-[34px] font-bold leading-[38px]">
+        Head line the news
+      </h1>
+      <input
+        className="mt-5 border px-2 py-1 text-[20px]"
+        type="search"
+        placeholder="Enter news item"
+        value={news}
+        onChange={handleSearch}
+        onKeyPress={handleEnter}
+      />
+      <div className="my-5">
+        {Object.keys(newsCatagory).map((item) => (
+          <button className="mx-3 border px-3 py-1">
+            {newsCatagory[item]}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Header;
