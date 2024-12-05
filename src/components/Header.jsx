@@ -19,11 +19,11 @@ const Header = () => {
 
   return (
     <div className="container my-4 flex flex-col items-center">
-      <h1 className="text-center text-[34px] font-bold leading-[38px]">
+      <h1 className="text-center text-[34px] font-bold uppercase leading-[38px]">
         Head line the news
       </h1>
       <input
-        className="mt-5 border px-2 py-1 text-[20px]"
+        className="mt-5 w-[550px] border px-3 py-2 text-[20px]"
         type="search"
         placeholder="Enter news item"
         value={news}
@@ -32,8 +32,8 @@ const Header = () => {
       />
       <div className="my-5">
         {Object.keys(newsCatagory).map((item) => (
-          <button className="mx-3 border px-3 py-1">
-            {newsCatagory[item]}
+          <button className="mx-3 border px-3 py-1 font-medium capitalize duration-[0.4s] hover:bg-teal-700 hover:text-white">
+            {`#${newsCatagory[item]}`}
           </button>
         ))}
       </div>
