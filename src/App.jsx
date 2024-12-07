@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import NewsList from "./components/NewsList";
+import Pagination from "./components/Pagination";
 
 const App = () => {
   const news = [
@@ -21,6 +22,7 @@ const App = () => {
     <div>
       <Header category="technology" />
       <NewsList news={news} />
+      <Pagination/>
     </div>
   );
 };
