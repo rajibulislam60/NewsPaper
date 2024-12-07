@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import NewsList from "./components/NewsList";
 import Pagination from "./components/Pagination";
+import PaginationTitle from "./components/PaginationTitle";
 
 const App = () => {
   const news = [
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <div>
       <Header category="technology" />
+      <PaginationTitle/>
       <NewsList news={news} />
       <Pagination/>
     </div>
