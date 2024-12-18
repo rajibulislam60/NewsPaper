@@ -17,4 +17,4 @@ if (process.env.NODE_ENV !== "development") {
 }
 
 
-console.log(import.meta.env.VITE_TEST_NEWS_URL, import.meta.env.VITE_TEST_NEWS_API_KEY);
+
