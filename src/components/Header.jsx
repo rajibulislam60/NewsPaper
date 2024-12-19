@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import newsCatagory from "../news/main";
 
-const Header = () => {
-  // const newsCatagory = {
-  //   technology: "technology",
-  //   science: "science",
-  //   business: "business",
-  //   politics: "politics",
-  //   education: "education",
-  // };
+const Header = ({changeCategory, category}) => {
 
   let [news, setNews] = useState("");
 
@@ -31,8 +24,16 @@ const Header = () => {
         onKeyPress={handleEnter}
       />
       <div className="my-5">
-        {Object.keys(newsCatagory).map((item) => (
-          <button className="mx-3 border px-3 py-1 font-medium capitalize duration-[0.4s] hover:bg-teal-700 hover:text-white">
+      {Object.keys(newsCatagory).map((item) => (
+          <button
+            key={item}
+            onClick={() => changeCategory(newsCatagory[item])}
+            className={`mx-3 border px-3 py-1 font-medium capitalize duration-[0.4s] hover:bg-teal-700 hover:text-white ${
+              category === newsCatagory[item]
+                ? "bg-red-500 text-white"
+                : ""
+            }`}
+          >
             {`#${newsCatagory[item]}`}
           </button>
         ))}
