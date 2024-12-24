@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import newsCatagory from "../news/main";
 
-const Header = ({changeCategory, category}) => {
-
+const Header = ({ changeCategory, category, onSearch }) => {
   let [news, setNews] = useState("");
 
   let handleSearch = (e) => {
     setNews(e.target.value);
   };
-  let handleEnter = () => {};
+  let handleEnter = (e) => {
+    if (e.key === "Enter" && news.trim) {
+      onSearch(news.trim());
+      setNews(" ")
+    }
+  };
 
   return (
     <div className="container my-4 flex flex-col items-center">
@@ -24,14 +28,12 @@ const Header = ({changeCategory, category}) => {
         onKeyPress={handleEnter}
       />
       <div className="my-5">
-      {Object.keys(newsCatagory).map((item) => (
+        {Object.keys(newsCatagory).map((item) => (
           <button
             key={item}
             onClick={() => changeCategory(newsCatagory[item])}
             className={`mx-3 border px-3 py-1 font-medium capitalize duration-[0.4s] hover:bg-teal-700 hover:text-white ${
-              category === newsCatagory[item]
-                ? "bg-red-500 text-white"
-                : ""
+              category === newsCatagory[item] ? "bg-red-500 text-white" : ""
             }`}
           >
             {`#${newsCatagory[item]}`}

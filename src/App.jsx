@@ -11,15 +11,17 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [category, setCategory] = useState("technology");
+  const [quary, setQuary] = useState("");
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=${category}`;
-
+    const url = quary
+      ? `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&q=${quary}`
+      : `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=${category}`;
     const fetchNews = async () => {
       try {
         const response = await axios.get(url);
         setNews(response.data.articles);
-        setError(null)
+        setError(null);
       } catch (error) {
         console.error(error);
       }
@@ -27,15 +29,24 @@ const App = () => {
     };
 
     fetchNews();
-  }, [category]);
+  }, [category, quary]);
 
   let changeCategory = (newCategory) => {
     setCategory(newCategory);
+    setQuary("");
+  };
+
+  let onSearch = (searchQuary) => {
+    setQuary(searchQuary);
   };
 
   return (
     <div>
-      <Header category={category} changeCategory={changeCategory} />
+      <Header
+        category={category}
+        changeCategory={changeCategory}
+        onSearch={onSearch}
+      />
       <PaginationTitle category={category} />
       {isLoading ? (
         <Loading />
