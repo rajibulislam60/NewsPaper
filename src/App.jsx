@@ -12,11 +12,13 @@ const App = () => {
   const [error, setError] = useState(null);
   const [category, setCategory] = useState("technology");
   const [quary, setQuary] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
 
   useEffect(() => {
     const url = quary
-      ? `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&q=${quary}`
-      : `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=${category}`;
+      ? `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&q=${quary}&pageSize=${pageSize}`
+      : `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=${category}&pageSize=${pageSize}`;
     const fetchNews = async () => {
       try {
         const response = await axios.get(url);
@@ -29,15 +31,21 @@ const App = () => {
     };
 
     fetchNews();
-  }, [category, quary]);
+  }, [category, quary, currentPage]);
 
   let changeCategory = (newCategory) => {
     setCategory(newCategory);
     setQuary("");
+    setCurrentPage(1);
   };
 
   let onSearch = (searchQuary) => {
     setQuary(searchQuary);
+    setCurrentPage(1);
+  };
+
+  let handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
   };
 
   return (
@@ -55,7 +63,11 @@ const App = () => {
       ) : (
         <NewsList news={news} />
       )}
-      <Pagination />
+      <Pagination
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+        pageSize={pageSize}
+      />
     </div>
   );
 };
