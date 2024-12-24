@@ -1,18 +1,15 @@
-import React from 'react';
-import NewsItem from './NewsItem';
+import React from "react";
+import NewsItem from "./NewsItem";
 
-
-const NewsList = ({news}) => {
+const NewsList = ({ news }) => {
   return (
     <>
- 
-    <div>
+      <div>
         {news && news.length === 0 && <h4>There is no news</h4>}
-        {news && news.map((item)=>(<NewsItem key={item.title} item={item}/>))}
-    </div>
+        {news && news.map((item) => <NewsItem key={item.title} item={item} />)}
+      </div>
     </>
-    
-  )
-}
+  );
+};
 
-export default NewsList
+export default NewsList;

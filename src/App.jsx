@@ -13,30 +13,30 @@ const App = () => {
   const [category, setCategory] = useState("technology");
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=technology`;
+    const url = `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=${category}`;
 
     const fetchNews = async () => {
       try {
         const response = await axios.get(url);
         setNews(response.data.articles);
+        setError(null)
       } catch (error) {
         console.error(error);
-      } finally {
-        setIsLoading(false);
       }
+      setIsLoading(false);
     };
 
     fetchNews();
   }, [category]);
 
   let changeCategory = (newCategory) => {
-    setCategory({ newCategory });
+    setCategory(newCategory);
   };
 
   return (
     <div>
       <Header category={category} changeCategory={changeCategory} />
-      <PaginationTitle category={category}/>
+      <PaginationTitle category={category} />
       {isLoading ? (
         <Loading />
       ) : error ? (
