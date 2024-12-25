@@ -13,16 +13,18 @@ const App = () => {
   const [category, setCategory] = useState("technology");
   const [quary, setQuary] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
   const pageSize = 10;
 
   useEffect(() => {
     const url = quary
-      ? `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&q=${quary}&pageSize=${pageSize}`
-      : `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=${category}&pageSize=${pageSize}`;
+      ? `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&q=${quary}&pageSize=${pageSize}&Page=${currentPage}`
+      : `${import.meta.env.VITE_TEST_NEWS_URL}?apiKey=${import.meta.env.VITE_TEST_NEWS_API_KEY}&category=${category}&pageSize=${pageSize}&Page=${currentPage}`;
     const fetchNews = async () => {
       try {
         const response = await axios.get(url);
         setNews(response.data.articles);
+        setTotalResults(response.data.totalResults);
         setError(null);
       } catch (error) {
         console.error(error);
@@ -48,6 +50,8 @@ const App = () => {
     setCurrentPage(newPage);
   };
 
+  let totalPages = Math.ceil(totalResults / pageSize);
+
   return (
     <div>
       <Header
@@ -55,7 +59,12 @@ const App = () => {
         changeCategory={changeCategory}
         onSearch={onSearch}
       />
-      <PaginationTitle category={category} />
+      <PaginationTitle
+      totalResults={totalResults}
+        category={category}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
       {isLoading ? (
         <Loading />
       ) : error ? (
@@ -67,6 +76,7 @@ const App = () => {
         currentPage={currentPage}
         onPageChange={handlePageChange}
         pageSize={pageSize}
+        totalPages={totalPages}
       />
     </div>
   );
