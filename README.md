@@ -7,7 +7,12 @@ Here is the link of backend api: https://newsapi.org/
 
 And this is the project video
 
-<link src="./project_video.mp4" />
+# Feature
+    *Language: HTML, CSS, JavaScript.
+    *Framework: React.js, Tailwind
+    and some of npm.
+    *env manipulation.
+
 
 
 
