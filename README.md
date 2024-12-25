@@ -1,8 +1,11 @@
-# React + Vite
+# NEWSPAPER 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Newspaper Front-end & Design part is ready.
 
-Currently, two official plugins are available:
+Use Backend Api: newsapi.org
+Here is the link of backend api: https://newsapi.org/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+And this is the project video
+
+<link src="./project_video.mp4" />
+
